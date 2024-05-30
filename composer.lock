@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e788d36623f5aa3b9b254a19bb9a8a9",
+    "content-hash": "51144310ac9f5c59b613b2c0dd4ffcfd",
     "packages": [
         {
             "name": "brick/math",
@@ -209,6 +209,59 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
             },
             "time": "2022-10-27T11:44:00+00:00"
+        },
+        {
+            "name": "directorytree/authorization",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DirectoryTree/Authorization.git",
+                "reference": "9248c6a26c2511eeee410970d8a63f0a8e18479e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DirectoryTree/Authorization/zipball/9248c6a26c2511eeee410970d8a63f0a8e18479e",
+                "reference": "9248c6a26c2511eeee410970d8a63f0a8e18479e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.5|^6.20|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.7|^4.0|^5.0|^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0|^10.0"
+            },
+            "type": "project",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DirectoryTree\\Authorization\\AuthorizationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DirectoryTree\\Authorization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Native Laravel Authorization.",
+            "keywords": [
+                "acl",
+                "authorization",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "support": {
+                "issues": "https://github.com/DirectoryTree/Authorization/issues",
+                "source": "https://github.com/DirectoryTree/Authorization/tree/v1.2.0"
+            },
+            "time": "2024-03-14T19:05:00+00:00"
         },
         {
             "name": "doctrine/inflector",
