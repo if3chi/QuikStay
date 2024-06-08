@@ -12,6 +12,7 @@ final class Floor extends Model
 {
     use HasFactory, HasUuids;
 
+    /** @var array<int, string> */
     protected $fillable = [
         'name',
         'label',

@@ -10,6 +10,7 @@ class Amenity extends Model
 {
     use HasFactory, HasUuids;
 
+    /** @var array<int, string> */
     protected $fillable = [
         'name',
         'icon',
