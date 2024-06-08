@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FloorResource\Pages;
-use App\Filament\Resources\FloorResource\RelationManagers;
 use App\Models\Floor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FloorResource extends Resource
 {
@@ -66,6 +63,7 @@ class FloorResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -86,6 +84,7 @@ class FloorResource extends Resource
         return [
             'index' => Pages\ListFloors::route('/'),
             'create' => Pages\CreateFloor::route('/create'),
+            'view' => Pages\ViewFloor::route('/{record}'),
             'edit' => Pages\EditFloor::route('/{record}/edit'),
         ];
     }

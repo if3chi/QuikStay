@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Room extends Model
@@ -32,10 +33,19 @@ final class Room extends Model
     {
         return [
             'type' => RoomType::class,
-            'size' => 'interger',
-            'daily_rate' => 'interger',
-            'weekly_rate' => 'interger',
+            'size' => 'integer',
+            'daily_rate' => 'integer',
+            'weekly_rate' => 'integer',
         ];
+    }
+
+    /** @return BelongsToMany<Amenity> */
+    public function amenities(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            related: Amenity::class,
+            table: 'amenity_room',
+        );
     }
 
     public function bookings(): HasMany

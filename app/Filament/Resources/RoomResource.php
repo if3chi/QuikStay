@@ -2,22 +2,20 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\RoomType;
 use App\Filament\Resources\RoomResource\Pages;
-use App\Filament\Resources\RoomResource\RelationManagers;
 use App\Models\Room;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RoomResource extends Resource
 {
     protected static ?string $model = Room::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-key';
 
     public static function form(Form $form): Form
     {
@@ -31,14 +29,13 @@ class RoomResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('view')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('type')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('double'),
+                Forms\Components\Select::make('type')
+                    ->options(RoomType::class)
+                    ->required(),
+                Forms\Components\RichEditor::make('description')
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('room_number')
                     ->numeric(),
-                Forms\Components\TextInput::make('description')
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('persons')
                     ->required()
                     ->numeric()
@@ -65,11 +62,11 @@ class RoomResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
-                    ->searchable(),
+                    ->hidden(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('label')
-                    ->searchable(),
+                    ->searchable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('view')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
@@ -118,7 +115,9 @@ class RoomResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RoomResource\RelationManagers\AmenitiesRelationManager::class,
+            RoomResource\RelationManagers\BookingsRelationManager::class,
+            RoomResource\RelationManagers\FloorRelationManager::class,
         ];
     }
 
@@ -127,6 +126,7 @@ class RoomResource extends Resource
         return [
             'index' => Pages\ListRooms::route('/'),
             'create' => Pages\CreateRoom::route('/create'),
+            'view' => Pages\ViewRoom::route('/{record}'),
             'edit' => Pages\EditRoom::route('/{record}/edit'),
         ];
     }
